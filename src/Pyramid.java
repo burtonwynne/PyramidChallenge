@@ -1,18 +1,20 @@
 import java.util.ArrayList;
 
 public class Pyramid {
-
 	public static void main(String[] args) {
 		
 		int numberOfRows = -1;//the depth of the pyramid.
 		if(args.length == 0){
-			System.out.println("Command: java Pyramid <some number greater than 1>");
+			System.out.println("Command: java Pyramid <2-26>");
 			System.exit(1);
 		}else{
 			try{
 				numberOfRows = Integer.parseInt(args[0]);
 				if(numberOfRows < 2){
 					System.out.println("Argument '" + args[0] + "' must be greater than 1.");
+					System.exit(1);
+				}else if(numberOfRows > 26){
+					System.out.println("Argument '" + args[0] + "' must be less than 26.");
 					System.exit(1);
 				}else{
 					System.out.println("Numbers of rows: " + numberOfRows);
@@ -26,16 +28,17 @@ public class Pyramid {
 		ArrayList<Integer> currentRow = new ArrayList<Integer>();
 		ArrayList<Integer> previousRow = null;
 		currentRow.add(1);//the first row "1"
-		printRow(currentRow);
-		for(int index = 0; index < (numberOfRows - 1); index++){
+		printRow(currentRow, 1);
+		for(int index = 1; index < numberOfRows; index++){
 			previousRow = currentRow;
 			currentRow = getNextRow(previousRow);
-			printRow(currentRow);
+			printRow(currentRow, index + 1);
 		}
 	}
 	
-	public static void printRow(ArrayList<Integer> row){
+	public static void printRow(ArrayList<Integer> row, int rowNumber){
 		StringBuffer buffer = new StringBuffer();
+		buffer.append("Row ").append(rowNumber).append(": ");
 		for (int value : row) {
 			buffer.append(value);
 			buffer.append(" ");
