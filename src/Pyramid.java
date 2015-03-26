@@ -3,7 +3,26 @@ import java.util.ArrayList;
 public class Pyramid {
 
 	public static void main(String[] args) {
-		int numberOfRows = 9;//the depth of the pyramid.
+		
+		int numberOfRows = -1;//the depth of the pyramid.
+		if(args.length == 0){
+			System.out.println("Command: java Pyramid <some number greater than 1>");
+			System.exit(1);
+		}else{
+			try{
+				numberOfRows = Integer.parseInt(args[0]);
+				if(numberOfRows < 2){
+					System.out.println("Argument '" + args[0] + "' must be greater than 1.");
+					System.exit(1);
+				}else{
+					System.out.println("Numbers of rows: " + numberOfRows);
+				}
+			}catch(NumberFormatException nfe){
+				System.out.println("Argument '" + args[0] + "' is not a number.");
+				System.exit(1);
+			}
+		}
+		
 		ArrayList<Integer> currentRow = new ArrayList<Integer>();
 		ArrayList<Integer> previousRow = null;
 		currentRow.add(1);//the first row "1"
